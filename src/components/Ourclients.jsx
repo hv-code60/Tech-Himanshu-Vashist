@@ -17,22 +17,22 @@ export const OurClients = () => {
             <div className="flex flex-wrap justify-center gap-x-10 gap-y-8">
              <img
                 alt="Traveon"
-                src="/src/assets/ourclientslogo/traveon.png"
+                src="/ourclientslogo/traveon.png"
                 className="h-14 md:h-20 object-contain"
               />
               <img
                 alt="IBIEA 2025"
-                src="/src/assets/ourclientslogo/IBIEA.jpg"
+                src="/ourclientslogo/IBIEA.jpg"
                 className="h-14 md:h-20 object-contain"
               />
               <img
                 alt="ICCICT"
-                src="/src/assets/ourclientslogo/ICCICT.png"
+                src="/ourclientslogo/ICCICT.png"
                 className="h-14 md:h-20 object-contain"
               />
               <img
                 alt="nexa tech innovation"
-                src="/src/assets/ourclientslogo/nexatechinnovation.png"
+                src="/ourclientslogo/nexatechinnovation.png"
                 className="h-14 md:h-20 object-contain"
               />
 
