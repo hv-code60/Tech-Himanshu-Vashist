@@ -5,14 +5,14 @@ const testimonials = [
     name: "Aarav Sharma",
     role: "Founder, ScaleEdge Solutions",
     company: "ScaleEdge",
-    text: "NexaH Technologies helped us streamline our internal operations with a custom dashboard that was clean, fast, and highly reliable. The team understood our requirements quickly and delivered exactly what our business needed.",
+    text: "Zyntraa Solutions helped us streamline our internal operations with a custom dashboard that was clean, fast, and highly reliable. The team understood our requirements quickly and delivered exactly what our business needed.",
     image: "https://i.pravatar.cc/100?img=12",
   },
   {
     name: "Priya Mehta",
     role: "Director, Innovent Labs",
     company: "Innovent",
-    text: "We approached NexaH for a complete website revamp and the results were excellent. The new website looks premium, loads faster, and has significantly improved our lead quality.",
+    text: "We approached Zyntraa for a complete website revamp and the results were excellent. The new website looks premium, loads faster, and has significantly improved our lead quality.",
     image: "https://i.pravatar.cc/100?img=32",
   },
   {
@@ -26,7 +26,7 @@ const testimonials = [
     name: "Sneha Kapoor",
     role: "Co-Founder, GrowthNest",
     company: "GrowthNest",
-    text: "The automation solutions built by NexaH saved our team hours of repetitive work every week. Their ability to combine business understanding with technical execution made a huge difference.",
+    text: "The automation solutions built by Zynntraa saved our team hours of repetitive work every week. Their ability to combine business understanding with technical execution made a huge difference.",
     image: "https://i.pravatar.cc/100?img=47",
   },
   {
@@ -176,6 +176,7 @@ export default function PremiumTiltedTestimonials() {
       fontSize: isMobile ? "30px" : "clamp(38px, 5vw, 58px)",
       lineHeight: 1.05,
       letterSpacing: "-0.05em",
+      
     },
 
     subHeading: {
@@ -471,7 +472,7 @@ export default function PremiumTiltedTestimonials() {
           <div style={styles.badge}>Testimonials</div>
           <h2 style={styles.heading}>Trusted by teams that care about quality</h2>
           <p style={styles.subHeading}>
-            Real feedback from businesses that chose NexaH Technologies for
+            Real feedback from businesses that chose Zyntraa Solutions for
             websites, software, automation, and scalable digital products.
           </p>
           <div style={styles.trustLine}>Built with clarity, speed, and long-term trust.</div>

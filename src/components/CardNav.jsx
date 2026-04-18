@@ -4,7 +4,7 @@ import { FiChevronDown } from 'react-icons/fi';
 
 export default function CardNav({
   logo,
-  logoAlt = 'NexaH Technologies',
+  logoAlt = 'Zyntraa Solutions',
   pages = [],
   baseColor = '#FFFFFF',
   textColor = '#0B3C5D',

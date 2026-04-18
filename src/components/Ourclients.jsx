@@ -7,7 +7,16 @@ export const OurClients = () => {
       <div className="w-full flex justify-center">
         <div className="w-full max-w-5xl px-6">
           <div className="flex flex-col gap-8">
-            <h1 className="text-center text-3xl md:text-4xl font-bold text-[#0B3C5D]" style={{ paddingBottom: "20px" }}>
+            <h1
+                className="text-center font-bold"
+                style={{
+                  color: "#0f172a",
+                  fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                  fontSize: "47px",
+                  fontWeight: 800,
+                  paddingBottom: "20px"
+                }}
+              >
                 Our Trusted Partners
             </h1>
             {/* <p className="text-center text-md font-medium text-tertiary" style={{ paddingTop: "0px" }}>

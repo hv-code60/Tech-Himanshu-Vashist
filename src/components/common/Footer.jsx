@@ -6,7 +6,7 @@ export default function Footer() {
       style={{
         background: '#081F2D',
         color: '#E6EEF5',
-        padding: '10px 24px 30px',
+        padding: '50px 24px 30px',
         marginTop: '100px',
       }}
     >
@@ -32,7 +32,7 @@ export default function Footer() {
               letterSpacing: 0.6,
             }}
           >
-            NexaH Technologies
+            Zyntraa Solutions
           </h3>
           <p
             style={{
@@ -135,17 +135,17 @@ export default function Footer() {
             <p>
               <strong style={{ color: '#2ECC71' }}>Email</strong>
               <br />
-              info@zyntraasolutions.com
+              tech@himanshuvashist.com
             </p>
             <p>
               <strong style={{ color: '#2ECC71' }}>Phone</strong>
               <br />
-              +91 9319303073
+              +91 8373931024
             </p>
             <p>
               <strong style={{ color: '#2ECC71' }}>Location</strong>
               <br />
-              India | Global Delivery
+              New Delhi, India | Global Delivery
             </p>
           </div>
         </div>
@@ -176,7 +176,7 @@ export default function Footer() {
         }}
       >
         <div>
-          © {currentYear} NexaH Technologies. All Rights Reserved.
+          © {currentYear} Zyntraa Solutions. All Rights Reserved.
         </div>
 
         <div style={{ display: 'flex', gap: 20 }}>

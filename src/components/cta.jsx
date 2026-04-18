@@ -20,9 +20,9 @@ export default function ProjectCTA() {
             Contact Us
           </a>
 
-          <a href="#portfolio" className="ctaSecondary">
+          {/* <a href="#portfolio" className="ctaSecondary">
             View Portfolio
-          </a>
+          </a> */}
         </div>
 
         {/* WhatsApp CTA (below buttons)

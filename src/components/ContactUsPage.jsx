@@ -365,7 +365,7 @@ export default function ContactUsPage() {
               <div style={styles.infoIcon}>✉</div>
               <h3 style={styles.infoTitle}>Email Us</h3>
               <p style={styles.infoText}>
-                info@zyntraasolutions.com
+                tech@himanshuvashist.com
                 <br />
                 Best for detailed requirements, project briefs, and structured discussions.
               </p>
@@ -375,7 +375,7 @@ export default function ContactUsPage() {
               <div style={styles.infoIcon}>☎</div>
               <h3 style={styles.infoTitle}>Call Us</h3>
               <p style={styles.infoText}>
-                +91 9319303073
+                +91 8373931024
                 <br />
                 Ideal for quick conversations, timelines, and direct coordination.
               </p>
@@ -428,14 +428,14 @@ export default function ContactUsPage() {
                   <div style={styles.panelItemIcon}>✉</div>
                   <div>
                     <p style={styles.panelItemTitle}>Email</p>
-                    <p style={styles.panelItemText}>info@zyntraasolutions.com</p>
+                    <p style={styles.panelItemText}>tech@himanshuvashist.com</p>
                   </div>
                 </div>
                 <div style={styles.panelItem}>
                   <div style={styles.panelItemIcon}>☎</div>
                   <div>
                     <p style={styles.panelItemTitle}>Phone</p>
-                    <p style={styles.panelItemText}>+91 9319303073</p>
+                    <p style={styles.panelItemText}>+91 8373931024</p>
                   </div>
                 </div>
                 <div style={styles.panelItem}>

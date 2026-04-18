@@ -182,18 +182,19 @@ function ImageCollage({
 export default function StrategySection() {
   return (
     <section style={{ width: "100%", background: "#ffffff", padding: "80px 0px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 20px" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 30px" }}>
         <PillHeading text="OUR STRATEGY" />
 
         <h2
           style={{
-            fontSize: 42,
+            fontSize: 47,
             fontWeight: 900,
             color: "#0f172a",
             textAlign: "center",
             margin: "0 auto",
             maxWidth: 900,
             lineHeight: 1.1,
+            fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
           }}
         >
           We Don’t Just Build — We Strategize

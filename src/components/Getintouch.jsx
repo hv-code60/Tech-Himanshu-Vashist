@@ -98,7 +98,7 @@ export default function PremiumGetInTouchSection() {
       position: "relative",
       overflow: "hidden",
       background: "#ffffff",
-      padding: "90px 20px 100px",
+      padding: "90px 20px 50px",
       fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     },
     glowOne: {
@@ -283,14 +283,14 @@ export default function PremiumGetInTouchSection() {
                 <div style={styles.infoIcon}>✉</div>
                 <div>
                   <p style={styles.infoLabel}>Email</p>
-                  <p style={styles.infoValue}>info@zyntraasolutions.com</p>
+                  <p style={styles.infoValue}>tech@himanshuvashist.com</p>
                 </div>
               </div>
               <div style={styles.infoItem}>
                 <div style={styles.infoIcon}>☎</div>
                 <div>
                   <p style={styles.infoLabel}>Phone</p>
-                  <p style={styles.infoValue}>+91 9319303073</p>
+                  <p style={styles.infoValue}>+91 8373931024</p>
                 </div>
               </div>
               <div style={styles.infoItem}>

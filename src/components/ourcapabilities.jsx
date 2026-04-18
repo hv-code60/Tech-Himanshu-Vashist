@@ -77,7 +77,7 @@ export default function PremiumCapabilitiesSection() {
       position: "relative",
       overflow: "hidden",
       background: "#ffffff",
-      padding: "90px 20px 100px",
+      padding: "00px 20px 0px",
       fontFamily:
         'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     },
@@ -123,6 +123,8 @@ export default function PremiumCapabilitiesSection() {
       zIndex: 2,
       maxWidth: "1220px",
       margin: "0 auto",
+      padding: "0 30px",
+
     },
 
     headingWrap: {
@@ -418,7 +420,7 @@ export default function PremiumCapabilitiesSection() {
           </div>
         </div> */}
 
-        <ProjectCTA />
+        {/* <ProjectCTA /> */}
         
       </div>
     </section>

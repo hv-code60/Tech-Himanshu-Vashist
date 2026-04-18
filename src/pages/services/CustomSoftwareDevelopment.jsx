@@ -1011,7 +1011,7 @@ export default function CustomSoftwareDevelopment() {
         <div style={styles.sectionBlock}>
           <div style={styles.sectionHeadWrapCentered}>
             <div style={{ textAlign: 'center' }}>
-              <span style={styles.sectionKicker}>Why NexaH</span>
+              <span style={styles.sectionKicker}>Why Zyntraa</span>
               <h2 style={styles.sectionHeading}>Why businesses trust our execution</h2>
             </div>
             <p style={styles.sectionTextCentered}>
