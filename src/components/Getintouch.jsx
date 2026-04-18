@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SuccessPopup from "./SuccessPopup";
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_BASE = import.meta.env.VITE_API_URL || "https://tech-website-backend-production.up.railway.app/";
 
 // Service dropdown value → exact backend enum
 const SERVICE_MAP = {
