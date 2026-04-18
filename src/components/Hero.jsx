@@ -1,19 +1,15 @@
-import { SlEye } from "react-icons/sl";
-
 export default function Hero() {
   return (
     <section
       id="home"
       style={{
-        position: 'relative',
-        width: '100%',
-        height: '100vh',
+        position: "relative",
+        width: "100%",
+        minHeight: "100vh",
         margin: 0,
         padding: 0,
-        backgroundColor: '#081F2D',
-        isolation: 'isolate',
-        border: 'none',
-        outline: 'none',
+        backgroundColor: "#081F2D",
+        isolation: "isolate",
       }}
     >
       {/* VIDEO BACKGROUND */}
@@ -24,54 +20,43 @@ export default function Hero() {
         playsInline
         preload="auto"
         style={{
-          position: 'absolute',
+          position: "absolute",
           inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
           opacity: 0.5,
           zIndex: 0,
-          pointerEvents: 'none',
+          pointerEvents: "none",
         }}
       >
         <source src="/Hero_1.mp4" type="video/mp4" />
       </video>
 
-      {/* DARK OVERLAY
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background:
-            'linear-gradient(180deg, rgba(8,31,45,0.85), rgba(8,31,45,0.6))',
-          zIndex: 1,
-        }}
-      /> */}
-
       {/* HERO CONTENT */}
       <div
-  style={{
-    position: 'relative',
-    zIndex: 2,
-    height: '100%',
-    maxWidth: 1200,
-    margin: '0 auto',
-    padding: '30px 24px 0',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center', // ⭐ center horizontally
-    textAlign: 'center',      // ⭐ text center
-  }}
->
-  <div style={{ maxWidth: 1000 }}>
+        style={{
+          position: "relative",
+          zIndex: 2,
+          minHeight: "100vh",
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "120px 24px 180px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+        }}
+      >
+        <div style={{ maxWidth: 1000, width: "100%" }}>
           <div
             style={{
-              color: '#2ECC71',
-              fontSize: 20,
+              color: "#2ECC71",
+              fontSize: "clamp(13px, 2vw, 20px)",
               fontWeight: 600,
               letterSpacing: 1,
               marginBottom: 14,
-              textTransform: 'uppercase',
+              textTransform: "uppercase",
             }}
           >
             Innovate • Secure • Grow
@@ -79,71 +64,41 @@ export default function Hero() {
 
           <h1
             style={{
-              fontSize: 'clamp(38px, 6vw, 56px)',
+              fontSize: "clamp(28px, 6vw, 56px)",
               lineHeight: 1.15,
               fontWeight: 700,
-              color: '#FFFFFF',
+              color: "#FFFFFF",
               marginBottom: 20,
             }}
           >
-            Building Scalable & Secure 
+            Building Scalable & Secure
             <br />
             Technology Solutions
           </h1>
 
           <p
             style={{
-              fontSize: 18,
+              fontSize: "clamp(15px, 2vw, 18px)",
               lineHeight: 1.7,
-              color: '#E6EEF4',
+              color: "#E6EEF4",
               maxWidth: 720,
-              alignItems: 'center',
-              marginBottom: 36,
+              margin: "0 auto 36px",
             }}
           >
             Engineering technology that secures today and empowers tomorrow.
           </p>
-
-          {/* <button
-  style={{
-    background: '#2ECC71',
-    color: '#FFFFFF',
-    border: 'none',
-    borderRadius: 14,
-    padding: '14px 36px',
-    fontSize: 16,
-    fontWeight: 600,
-    cursor: 'pointer',
-    boxShadow: '0 12px 32px rgba(46,204,113,0.35)',
-    transition: 'all 0.3s ease',
-  }}
-  onMouseEnter={e => {
-    e.currentTarget.style.transform = 'translateY(-2px)';
-    e.currentTarget.style.boxShadow =
-      '0 18px 40px rgba(46,204,113,0.45)';
-  }}
-  onMouseLeave={e => {
-    e.currentTarget.style.transform = 'translateY(0)';
-    e.currentTarget.style.boxShadow =
-      '0 12px 32px rgba(46,204,113,0.35)';
-  }}
->
-  Get Started
-</button> */}
         </div>
       </div>
 
-
-      {/* ✅ FLOATING APPOINTMENT CTA */}
+      {/* FLOATING APPOINTMENT CTA */}
       <div
         style={{
           position: "absolute",
           bottom: -80,
           left: "50%",
           transform: "translateX(-50%)",
-          width: "100%",
-          maxWidth:900,
-          padding: "0px",
+          width: "calc(100% - 32px)",
+          maxWidth: 900,
           zIndex: 3,
         }}
       >
@@ -155,11 +110,19 @@ export default function Hero() {
             boxShadow: "0 20px 50px rgba(0,0,0,0.25)",
           }}
         >
-          <h2 style={{ color: "#0B3C5D", marginBottom: 10, fontWeight: 900, textAlign: 'Left', fontSize: 19 }}>
+          <h2
+            style={{
+              color: "#0B3C5D",
+              marginBottom: 12,
+              fontWeight: 900,
+              textAlign: "left",
+              fontSize: "clamp(15px, 2.5vw, 19px)",
+            }}
+          >
             Make An Appointment Now !!
           </h2>
 
-      <form
+          <form
             style={{
               display: "flex",
               gap: 10,
@@ -167,28 +130,15 @@ export default function Hero() {
               alignItems: "center",
             }}
           >
-            <input
-              type="text"
-              placeholder="Name"
-              style={inputStyle}
-            />
-
-            <input
-              type="email"
-              placeholder="Email"
-              style={inputStyle}
-            />
-
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              style={inputStyle}
-            />
+            <input type="text" placeholder="Name" style={inputStyle} />
+            <input type="email" placeholder="Email" style={inputStyle} />
+            <input type="tel" placeholder="Phone Number" style={inputStyle} />
 
             <button
               type="submit"
+              className="appt-btn"
               style={{
-                padding: "14px 32px",
+                padding: "14px 24px",
                 background: "#2ECC71",
                 color: "#FFFFFF",
                 border: "none",
@@ -197,29 +147,39 @@ export default function Hero() {
                 fontSize: 14,
                 letterSpacing: 0.5,
                 cursor: "pointer",
-                minWidth: 200,
+                width: "100%",
+                maxWidth: 220,
                 height: 50,
+                flexShrink: 0,
               }}
             >
               BOOK APPOINTMENT
             </button>
           </form>
-
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .appt-btn {
+            max-width: 100% !important;
+            margin: 4px auto 0 !important;
+            display: block !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
 
 const inputStyle = {
-  flex: 1,
-  minWidth: 100,
+  flex: "1 1 140px",
+  minWidth: 120,
   padding: "10px 12px",
   borderRadius: 4,
   border: "none",
   background: "#c1c5c140",
-  outline: "None",
-  style: "borderRadius: 16,",
+  outline: "none",
+  height: 50,
+  fontSize: 14,
 };
-
-

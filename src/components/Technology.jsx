@@ -1,6 +1,5 @@
 import React from "react";
 
-/* centered pill heading */
 const PillHeading = ({ text = "OUR STRATEGY" }) => (
   <div style={{ textAlign: "center", marginBottom: 18 }}>
     <div
@@ -25,29 +24,17 @@ const PillHeading = ({ text = "OUR STRATEGY" }) => (
   </div>
 );
 
-/* green check icon */
 const Check = () => (
   <div
     style={{
-      width: 46,
-      height: 46,
-      minWidth: 46,
-      borderRadius: "50%",
-      background: "#22c55e",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      width: 46, height: 46, minWidth: 46,
+      borderRadius: "50%", background: "#22c55e",
+      display: "flex", alignItems: "center", justifyContent: "center",
       boxShadow: "0 14px 30px rgba(34,197,94,.28)",
     }}
   >
     <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
-      <path
-        d="M20 6L9 17l-5-5"
-        stroke="white"
-        strokeWidth="2.7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M20 6L9 17l-5-5" stroke="white" strokeWidth="2.7" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   </div>
 );
@@ -56,15 +43,14 @@ const StrategyItem = ({ title, desc }) => (
   <div style={{ display: "flex", gap: 18, alignItems: "flex-start" }}>
     <Check />
     <div>
-      <h4 style={{ fontSize: 20, fontWeight: 800, color: "#0f172a", margin: 0 }}>{title}</h4>
-      <p style={{ marginTop: 8, marginBottom: 0, color: "#64748b", lineHeight: 1.75, fontSize: 16 }}>
+      <h4 style={{ fontSize: "clamp(16px, 2vw, 20px)", fontWeight: 800, color: "#0f172a", margin: 0 }}>{title}</h4>
+      <p style={{ marginTop: 8, marginBottom: 0, color: "#64748b", lineHeight: 1.75, fontSize: "clamp(14px, 1.5vw, 16px)" }}>
         {desc}
       </p>
     </div>
   </div>
 );
 
-/* Collage Image Block (like your screenshot) */
 function ImageCollage({
   topImage = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
   bottomLeftImage = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&q=80",
@@ -72,107 +58,42 @@ function ImageCollage({
 }) {
   return (
     <div style={{ width: "100%", position: "relative" }}>
-      {/* top big image */}
-      <div
-        style={{
-          borderRadius: 28,
-          overflow: "hidden",
-          boxShadow: "0 40px 90px rgba(2,6,23,.18)",
-          border: "1px solid rgba(15,23,42,.08)",
-        }}
-      >
+      <div style={{ borderRadius: 28, overflow: "hidden", boxShadow: "0 40px 90px rgba(2,6,23,.18)", border: "1px solid rgba(15,23,42,.08)" }}>
         <img
           src={topImage}
           alt="Top"
-          style={{
-            width: "100%",
-            height: 360,
-            objectFit: "cover",
-            display: "block",
-          }}
+          style={{ width: "100%", height: "clamp(200px, 30vw, 360px)", objectFit: "cover", display: "block" }}
         />
       </div>
 
-      {/* floating CTA card */}
-      <div
-        style={{
-          position: "absolute",
-          left: 18,
-          bottom: 122,
-          background: "#ffffff",
-          borderRadius: 18,
-          padding: "14px 16px",
-          display: "flex",
-          gap: 12,
-          alignItems: "center",
-          boxShadow: "0 18px 50px rgba(2,6,23,.18)",
-          border: "1px solid rgba(15,23,42,.08)",
-        }}
-      >
-        <div
-          style={{
-            width: 44,
-            height: 44,
-            borderRadius: 14,
-            background: "#22c55e",
-            display: "grid",
-            placeItems: "center",
-            color: "#fff",
-            boxShadow: "0 14px 30px rgba(6,182,212,.25)",
-            flexShrink: 0,
-          }}
-        >
+      <div style={{
+        position: "absolute", left: 18, bottom: 122,
+        background: "#ffffff", borderRadius: 18, padding: "14px 16px",
+        display: "flex", gap: 12, alignItems: "center",
+        boxShadow: "0 18px 50px rgba(2,6,23,.18)", border: "1px solid rgba(15,23,42,.08)",
+      }}>
+        <div style={{
+          width: 44, height: 44, borderRadius: 14, background: "#22c55e",
+          display: "grid", placeItems: "center", color: "#fff",
+          boxShadow: "0 14px 30px rgba(6,182,212,.25)", flexShrink: 0,
+        }}>
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
             <path d="M5 12h12" stroke="white" strokeWidth="2.6" strokeLinecap="round" />
             <path d="M13 6l6 6-6 6" stroke="white" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
-
         <div style={{ lineHeight: 1.15 }}>
           <div style={{ fontSize: 13, fontWeight: 700, color: "#64748b" }}>Quick Action</div>
           <div style={{ fontSize: 16, fontWeight: 900, color: "#0f172a" }}>Consult Now</div>
         </div>
       </div>
 
-      {/* bottom 2 images */}
-      <div
-        style={{
-          marginTop: 16,
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 16,
-        }}
-      >
-        <div
-          style={{
-            borderRadius: 22,
-            overflow: "hidden",
-            border: "1px solid rgba(15,23,42,.08)",
-            boxShadow: "0 18px 45px rgba(2,6,23,.10)",
-            height: 180,
-          }}
-        >
-          <img
-            src={bottomLeftImage}
-            alt="Bottom left"
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-          />
+      <div style={{ marginTop: 16, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+        <div style={{ borderRadius: 22, overflow: "hidden", border: "1px solid rgba(15,23,42,.08)", boxShadow: "0 18px 45px rgba(2,6,23,.10)", height: "clamp(120px, 15vw, 180px)" }}>
+          <img src={bottomLeftImage} alt="Bottom left" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
         </div>
-
-        <div
-          style={{
-            borderRadius: 22,
-            overflow: "hidden",
-            border: "1px solid rgba(15,23,42,.08)",
-            boxShadow: "0 18px 45px rgba(2,6,23,.10)",
-            height: 180,
-          }}
-        >
-          <img
-            src={bottomRightImage}
-            alt="Bottom right"
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-          />
+        <div style={{ borderRadius: 22, overflow: "hidden", border: "1px solid rgba(15,23,42,.08)", boxShadow: "0 18px 45px rgba(2,6,23,.10)", height: "clamp(120px, 15vw, 180px)" }}>
+          <img src={bottomRightImage} alt="Bottom right" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
         </div>
       </div>
     </div>
@@ -181,13 +102,13 @@ function ImageCollage({
 
 export default function StrategySection() {
   return (
-    <section style={{ width: "100%", background: "#ffffff", padding: "80px 0px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 30px" }}>
+    <section style={{ width: "100%", background: "#ffffff", padding: "80px 0" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 20px" }}>
         <PillHeading text="OUR STRATEGY" />
 
         <h2
           style={{
-            fontSize: 47,
+            fontSize: "clamp(28px, 5vw, 47px)",
             fontWeight: 900,
             color: "#0f172a",
             textAlign: "center",
@@ -197,7 +118,7 @@ export default function StrategySection() {
             fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
           }}
         >
-          We Don’t Just Build — We Strategize
+          We Don't Just Build — We Strategize
         </h2>
 
         <p
@@ -207,14 +128,13 @@ export default function StrategySection() {
             color: "#64748b",
             maxWidth: 860,
             lineHeight: 1.8,
-            fontSize: 17,
+            fontSize: "clamp(14px, 2vw, 17px)",
           }}
         >
           Our consulting services go beyond technical implementation. We partner with you to create clear roadmaps,
           scalable architecture, and ROI-focused decisions that support sustainable growth.
         </p>
 
-        {/* 2 Column Layout */}
         <div
           className="strategyWrap"
           style={{
@@ -224,17 +144,15 @@ export default function StrategySection() {
             alignItems: "center",
           }}
         >
-          {/* RIGHT IMAGE COLLAGE */}
           <ImageCollage />
 
-          {/* LEFT CONTENT */}
           <div>
             <div
               style={{
                 background: "#f8fbff",
                 border: "1px solid rgba(37,99,235,.15)",
                 borderRadius: 26,
-                padding: "28px 26px",
+                padding: "clamp(18px, 3vw, 28px) clamp(16px, 3vw, 26px)",
                 boxShadow: "0 18px 50px rgba(2,6,23,.06)",
               }}
             >
@@ -267,6 +185,7 @@ export default function StrategySection() {
                   fontWeight: 800,
                   textDecoration: "none",
                   boxShadow: "0 18px 40px rgba(34,197,94,.30)",
+                  fontSize: "clamp(13px, 1.5vw, 15px)",
                 }}
               >
                 Talk to Our Experts
@@ -276,10 +195,9 @@ export default function StrategySection() {
         </div>
       </div>
 
-      {/* MOBILE FIX */}
       <style>{`
-        @media (max-width: 900px){
-          .strategyWrap{
+        @media (max-width: 900px) {
+          .strategyWrap {
             grid-template-columns: 1fr !important;
             gap: 34px !important;
           }

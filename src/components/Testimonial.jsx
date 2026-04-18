@@ -40,528 +40,260 @@ const testimonials = [
 
 export default function PremiumTiltedTestimonials() {
   const [current, setCurrent] = useState(2);
-  const [isMobile, setIsMobile] = useState(false);
+  const [screenW, setScreenW] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1200
+  );
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const onResize = () => setScreenW(window.innerWidth);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   useEffect(() => {
     if (hovered) return;
-
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % testimonials.length);
-    }, 4200);
-
+    const timer = setInterval(
+      () => setCurrent((p) => (p + 1) % testimonials.length),
+      4200
+    );
     return () => clearInterval(timer);
   }, [hovered]);
 
-  const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % testimonials.length);
-  };
+  const nextSlide = () =>
+    setCurrent((p) => (p + 1) % testimonials.length);
+  const prevSlide = () =>
+    setCurrent((p) => (p - 1 + testimonials.length) % testimonials.length);
 
-  const prevSlide = () => {
-    setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  // Breakpoints
+  const isSm = screenW < 480;
+  const isMd = screenW >= 480 && screenW < 900;
+
+  // Center card width (px)
+  const centerW = isSm
+    ? Math.min(screenW - 48, 320)
+    : isMd
+    ? Math.min(screenW - 100, 360)
+    : 360;
+
+  // Side card config — scaled to screen
+  const sideOffsetX = isSm ? screenW * 0.37 : isMd ? screenW * 0.33 : 300;
+  const farOffsetX  = isSm ? screenW * 0.68 : isMd ? screenW * 0.60 : 560;
+  const sideW       = isSm ? centerW * 0.70 : isMd ? centerW * 0.74 : 270;
+  const farW        = isSm ? centerW * 0.56 : isMd ? centerW * 0.60 : 220;
+
+  // carousel container height
+  const carouselH = isSm ? 460 : isMd ? 510 : 560;
+
+  const positionStyles = {
+    center: {
+      width: centerW,
+      transform: "translateX(0px) translateY(0px) rotate(0deg) scale(1)",
+      opacity: 1,
+      zIndex: 5,
+      boxShadow:
+        "0 30px 70px rgba(15,23,42,0.13), 0 12px 34px rgba(34,197,94,0.10)",
+      border: "1.5px solid rgba(34, 197, 94, 0.22)",
+    },
+    left: {
+      width: sideW,
+      transform: `translateX(-${sideOffsetX}px) translateY(22px) rotate(-5deg) scale(1)`,
+      opacity: isSm ? 0.52 : 0.72,
+      zIndex: 4,
+      filter: isSm ? "blur(0.8px)" : "none",
+    },
+    right: {
+      width: sideW,
+      transform: `translateX(${sideOffsetX}px) translateY(22px) rotate(5deg) scale(1)`,
+      opacity: isSm ? 0.52 : 0.72,
+      zIndex: 4,
+      filter: isSm ? "blur(0.8px)" : "none",
+    },
+    farLeft: {
+      width: farW,
+      transform: `translateX(-${farOffsetX}px) translateY(52px) rotate(-9deg) scale(1)`,
+      opacity: isSm ? 0.18 : isMd ? 0.28 : 0.42,
+      zIndex: 3,
+      filter: "blur(1.5px)",
+    },
+    farRight: {
+      width: farW,
+      transform: `translateX(${farOffsetX}px) translateY(52px) rotate(9deg) scale(1)`,
+      opacity: isSm ? 0.18 : isMd ? 0.28 : 0.42,
+      zIndex: 3,
+      filter: "blur(1.5px)",
+    },
   };
 
   const visibleCards = useMemo(() => {
     const total = testimonials.length;
-    const prev2 = (current - 2 + total) % total;
-    const prev1 = (current - 1 + total) % total;
-    const next1 = (current + 1) % total;
-    const next2 = (current + 2) % total;
-
-    if (isMobile) {
-      return [{ ...testimonials[current], position: "center", index: current }];
-    }
-
     return [
-      { ...testimonials[prev2], position: "farLeft", index: prev2 },
-      { ...testimonials[prev1], position: "left", index: prev1 },
-      { ...testimonials[current], position: "center", index: current },
-      { ...testimonials[next1], position: "right", index: next1 },
-      { ...testimonials[next2], position: "farRight", index: next2 },
+      { ...testimonials[(current - 2 + total) % total], position: "farLeft",  index: (current - 2 + total) % total },
+      { ...testimonials[(current - 1 + total) % total], position: "left",     index: (current - 1 + total) % total },
+      { ...testimonials[current],                        position: "center",   index: current },
+      { ...testimonials[(current + 1) % total],          position: "right",    index: (current + 1) % total },
+      { ...testimonials[(current + 2) % total],          position: "farRight", index: (current + 2) % total },
     ];
-  }, [current, isMobile]);
-
-  const styles = {
-    section: {
-      position: "relative",
-      overflow: "hidden",
-      background: "#ffffff",
-      padding: isMobile ? "56px 16px 92px" : "78px 20px 120px",
-      fontFamily:
-        'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-    },
-
-    glowOne: {
-      position: "absolute",
-      top: "-80px",
-      left: "50%",
-      transform: "translateX(-50%)",
-      width: isMobile ? "260px" : "540px",
-      height: isMobile ? "260px" : "540px",
-      borderRadius: "50%",
-      background: "rgba(34, 197, 94, 0.07)",
-      filter: "blur(100px)",
-      pointerEvents: "none",
-      zIndex: 1,
-    },
-
-    glowTwo: {
-      position: "absolute",
-      top: "80px",
-      right: "-60px",
-      width: "220px",
-      height: "220px",
-      borderRadius: "50%",
-      background: "rgba(20, 184, 166, 0.06)",
-      filter: "blur(90px)",
-      pointerEvents: "none",
-      zIndex: 1,
-    },
-
-    gridGlow: {
-      position: "absolute",
-      inset: 0,
-      background:
-        "linear-gradient(to right, rgba(15,23,42,0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(15,23,42,0.02) 1px, transparent 1px)",
-      backgroundSize: "42px 42px",
-      maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.5), transparent 80%)",
-      WebkitMaskImage:
-        "linear-gradient(to bottom, rgba(0,0,0,0.5), transparent 80%)",
-      pointerEvents: "none",
-      zIndex: 1,
-    },
-
-    container: {
-      position: "relative",
-      zIndex: 2,
-      maxWidth: "1380px",
-      margin: "0 auto",
-    },
-
-    headingWrap: {
-      textAlign: "center",
-      marginBottom: isMobile ? "28px" : "42px",
-    },
-
-    badge: {
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: "8px",
-      padding: "8px 14px",
-      borderRadius: "999px",
-      background: "rgba(34, 197, 94, 0.08)",
-      border: "1px solid rgba(34, 197, 94, 0.16)",
-      color: "#16a34a",
-      fontSize: isMobile ? "13px" : "14px",
-      fontWeight: 700,
-      letterSpacing: "0.02em",
-      marginBottom: "18px",
-    },
-
-    heading: {
-      margin: 0,
-      color: "#0f172a",
-      fontWeight: 800,
-      fontSize: isMobile ? "30px" : "clamp(38px, 5vw, 58px)",
-      lineHeight: 1.05,
-      letterSpacing: "-0.05em",
-      
-    },
-
-    subHeading: {
-      maxWidth: "760px",
-      margin: "14px auto 0",
-      color: "#64748b",
-      fontSize: isMobile ? "14px" : "17px",
-      lineHeight: 1.85,
-    },
-
-    trustLine: {
-      marginTop: "16px",
-      fontSize: isMobile ? "13px" : "14px",
-      color: "#16a34a",
-      fontWeight: 600,
-    },
-
-    carouselWrap: {
-      position: "relative",
-      minHeight: isMobile ? "430px" : "560px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      marginTop: isMobile ? "8px" : "18px",
-    },
-
-    cardBase: {
-      position: isMobile ? "relative" : "absolute",
-      width: isMobile ? "100%" : "300px",
-      minHeight: isMobile ? "auto" : "360px",
-      borderRadius: "28px",
-      padding: "28px 24px 24px",
-      boxSizing: "border-box",
-      background: "rgba(255,255,255,0.92)",
-      border: "1px solid rgba(15, 23, 42, 0.07)",
-      boxShadow:
-        "0 12px 28px rgba(15,23,42,0.06), 0 2px 8px rgba(15,23,42,0.03)",
-      transition: "all 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
-      textAlign: "left",
-      backdropFilter: "blur(10px)",
-      WebkitBackdropFilter: "blur(10px)",
-      overflow: "hidden",
-    },
-
-    cardHighlight: {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "1px",
-      background:
-        "linear-gradient(90deg, rgba(34,197,94,0), rgba(34,197,94,0.7), rgba(20,184,166,0), rgba(34,197,94,0))",
-      opacity: 0.8,
-    },
-
-    center: {
-      width: isMobile ? "100%" : "360px",
-      minHeight: "392px",
-      transform: "translateX(0) translateY(0) rotate(0deg) scale(1)",
-      opacity: 1,
-      zIndex: 5,
-      boxShadow:
-        "0 30px 70px rgba(15,23,42,0.12), 0 12px 34px rgba(34,197,94,0.08)",
-      border: "1px solid rgba(34, 197, 94, 0.18)",
-    },
-
-    left: {
-      transform: "translateX(-290px) translateY(26px) rotate(-5deg) scale(0.93)",
-      opacity: 0.88,
-      zIndex: 4,
-    },
-
-    right: {
-      transform: "translateX(290px) translateY(26px) rotate(5deg) scale(0.93)",
-      opacity: 0.88,
-      zIndex: 4,
-    },
-
-    farLeft: {
-      transform: "translateX(-560px) translateY(62px) rotate(-8deg) scale(0.84)",
-      opacity: 0.55,
-      zIndex: 3,
-    },
-
-    farRight: {
-      transform: "translateX(560px) translateY(62px) rotate(8deg) scale(0.84)",
-      opacity: 0.55,
-      zIndex: 3,
-    },
-
-    topMeta: {
-      display: "flex",
-      alignItems: "center",
-      gap: "14px",
-      marginBottom: "20px",
-    },
-
-    avatarWrap: {
-      width: "54px",
-      height: "54px",
-      borderRadius: "50%",
-      padding: "2px",
-      background:
-        "linear-gradient(135deg, rgba(34,197,94,0.55), rgba(20,184,166,0.35))",
-      flexShrink: 0,
-    },
-
-    avatar: {
-      width: "100%",
-      height: "100%",
-      borderRadius: "50%",
-      objectFit: "cover",
-      display: "block",
-      background: "#fff",
-    },
-
-    personBlock: {
-      minWidth: 0,
-      flex: 1,
-    },
-
-    nameRow: {
-      display: "flex",
-      alignItems: "center",
-      gap: "8px",
-      flexWrap: "wrap",
-    },
-
-    name: {
-      margin: 0,
-      fontSize: "16px",
-      fontWeight: 700,
-      color: "#0f172a",
-    },
-
-    chip: {
-      display: "inline-flex",
-      alignItems: "center",
-      padding: "4px 8px",
-      borderRadius: "999px",
-      background: "rgba(15,23,42,0.05)",
-      color: "#475569",
-      fontSize: "11px",
-      fontWeight: 600,
-    },
-
-    role: {
-      margin: "6px 0 0 0",
-      fontSize: "13px",
-      color: "#64748b",
-      lineHeight: 1.6,
-    },
-
-    starRow: {
-      display: "flex",
-      alignItems: "center",
-      gap: "4px",
-      marginBottom: "18px",
-      color: "#16a34a",
-      fontSize: "14px",
-    },
-
-    quoteMark: {
-      fontSize: "44px",
-      lineHeight: 0.8,
-      color: "rgba(34,197,94,0.18)",
-      fontWeight: 800,
-      marginBottom: "8px",
-    },
-
-    text: {
-      fontSize: "15px",
-      lineHeight: 1.9,
-      color: "#334155",
-      margin: "0 0 22px 0",
-    },
-
-    bottomLine: {
-      width: "100%",
-      height: "1px",
-      background: "linear-gradient(90deg, #e2e8f0 0%, #f8fafc 100%)",
-      marginBottom: "16px",
-    },
-
-    companyRow: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      gap: "10px",
-    },
-
-    companyText: {
-      margin: 0,
-      fontSize: "12px",
-      color: "#64748b",
-      fontWeight: 600,
-      letterSpacing: "0.03em",
-      textTransform: "uppercase",
-    },
-
-    verifiedDot: {
-      width: "10px",
-      height: "10px",
-      borderRadius: "50%",
-      background: "linear-gradient(135deg, #22c55e 0%, #14b8a6 100%)",
-      boxShadow: "0 0 0 4px rgba(34,197,94,0.08)",
-    },
-
-    controlsWrap: {
-      marginTop: isMobile ? "24px" : "18px",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      gap: "16px",
-    },
-
-    navBtn: {
-      width: "48px",
-      height: "48px",
-      borderRadius: "50%",
-      border: "1px solid rgba(15,23,42,0.08)",
-      background: "#ffffff",
-      color: "#0f172a",
-      cursor: "pointer",
-      boxShadow: "0 10px 24px rgba(15,23,42,0.06)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      transition: "all 0.25s ease",
-    },
-
-    dotsWrap: {
-      display: "flex",
-      alignItems: "center",
-      gap: "8px",
-    },
-
-    dot: {
-      width: "8px",
-      height: "8px",
-      borderRadius: "999px",
-      background: "#cbd5e1",
-      border: "none",
-      cursor: "pointer",
-      padding: 0,
-      transition: "all 0.3s ease",
-    },
-
-    activeDot: {
-      width: "28px",
-      background: "linear-gradient(90deg, #22c55e 0%, #14b8a6 100%)",
-      boxShadow: "0 6px 16px rgba(34,197,94,0.18)",
-    },
-  };
-
-  const positionStyle = (position) => {
-    if (isMobile) return styles.center;
-    return styles[position];
-  };
+  }, [current]);
 
   const ArrowLeft = () => (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M15 18L9 12L15 6"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
-
   const ArrowRight = () => (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M9 18L15 12L9 6"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 
   return (
-    <section style={styles.section} id="testimonials">
-      <div style={styles.glowOne} />
-      <div style={styles.glowTwo} />
-      <div style={styles.gridGlow} />
+    <section
+      id="testimonials"
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        background: "#ffffff",
+        padding: isSm
+          ? "48px 0 64px"
+          : isMd
+          ? "60px 0 80px"
+          : "78px 0 120px",
+        fontFamily:
+          'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+      }}
+    >
+      {/* Glow blobs */}
+      <div style={{ position: "absolute", top: "-80px", left: "50%", transform: "translateX(-50%)", width: isSm ? "260px" : "540px", height: isSm ? "260px" : "540px", borderRadius: "50%", background: "rgba(34,197,94,0.07)", filter: "blur(100px)", pointerEvents: "none", zIndex: 1 }} />
+      <div style={{ position: "absolute", top: "80px", right: "-60px", width: "220px", height: "220px", borderRadius: "50%", background: "rgba(20,184,166,0.06)", filter: "blur(90px)", pointerEvents: "none", zIndex: 1 }} />
 
-      <div style={styles.container}>
-        <div style={styles.headingWrap}>
-          <div style={styles.badge}>Testimonials</div>
-          <h2 style={styles.heading}>Trusted by teams that care about quality</h2>
-          <p style={styles.subHeading}>
-            Real feedback from businesses that chose Zyntraa Solutions for
-            websites, software, automation, and scalable digital products.
+      <div style={{ position: "relative", zIndex: 2, maxWidth: 1380, margin: "0 auto", padding: "0 20px" }}>
+
+        {/* Heading */}
+        <div style={{ textAlign: "center", marginBottom: isSm ? "28px" : "42px" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "8px 14px", borderRadius: 999, background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.16)", color: "#16a34a", fontSize: isSm ? 12 : 14, fontWeight: 700, letterSpacing: "0.02em", marginBottom: 18 }}>
+            Testimonials
+          </div>
+          <h2 style={{ margin: 0, color: "#0f172a", fontWeight: 800, fontSize: isSm ? "26px" : isMd ? "32px" : "clamp(38px, 5vw, 58px)", lineHeight: 1.05, letterSpacing: "-0.05em" }}>
+            Trusted by teams that care about quality
+          </h2>
+          <p style={{ maxWidth: 760, margin: "14px auto 0", color: "#64748b", fontSize: isSm ? "14px" : "17px", lineHeight: 1.85 }}>
+            Real feedback from businesses that chose Zyntraa Solutions for websites, software, automation, and scalable digital products.
           </p>
-          <div style={styles.trustLine}>Built with clarity, speed, and long-term trust.</div>
+          <div style={{ marginTop: 16, fontSize: isSm ? 13 : 14, color: "#16a34a", fontWeight: 600 }}>
+            Built with clarity, speed, and long-term trust.
+          </div>
         </div>
 
-        <div
-          style={styles.carouselWrap}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
-          {visibleCards.map((item) => (
-            <div
-              key={`${item.position}-${item.index}`}
-              style={{
-                ...styles.cardBase,
-                ...positionStyle(item.position),
-              }}
-            >
-              <div style={styles.cardHighlight} />
+        {/* Fan Carousel */}
+        <div style={{ position: "relative" }}>
 
-              <div style={styles.topMeta}>
-                <div style={styles.avatarWrap}>
-                  <img src={item.image} alt={item.name} style={styles.avatar} />
-                </div>
+          {/* Left fade edge */}
+          <div style={{ position: "absolute", top: 0, left: 0, width: isSm ? "18%" : "12%", height: "100%", background: "linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0))", zIndex: 10, pointerEvents: "none" }} />
+          {/* Right fade edge */}
+          <div style={{ position: "absolute", top: 0, right: 0, width: isSm ? "18%" : "12%", height: "100%", background: "linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0))", zIndex: 10, pointerEvents: "none" }} />
 
-                <div style={styles.personBlock}>
-                  <div style={styles.nameRow}>
-                    <p style={styles.name}>{item.name}</p>
-                    <span style={styles.chip}>Client</span>
+          <div
+            style={{ position: "relative", height: carouselH, display: "flex", alignItems: "center", justifyContent: "center" }}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+          >
+            {visibleCards.map((item) => (
+              <div
+                key={`${item.position}-${item.index}`}
+                onClick={() => {
+                  if (item.position === "left" || item.position === "farLeft") prevSlide();
+                  if (item.position === "right" || item.position === "farRight") nextSlide();
+                }}
+                style={{
+                  position: "absolute",
+                  borderRadius: 24,
+                  padding: isSm ? "18px 16px 16px" : "24px 20px 20px",
+                  boxSizing: "border-box",
+                  background: "rgba(255,255,255,0.95)",
+                  border: "1px solid rgba(15,23,42,0.07)",
+                  boxShadow: "0 12px 28px rgba(15,23,42,0.06)",
+                  transition: "all 0.65s cubic-bezier(0.22, 1, 0.36, 1)",
+                  textAlign: "left",
+                  cursor: item.position !== "center" ? "pointer" : "default",
+                  overflow: "hidden",
+                  userSelect: "none",
+                  ...positionStyles[item.position],
+                }}
+              >
+                {/* Top shimmer */}
+                <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: 1, background: "linear-gradient(90deg, rgba(34,197,94,0), rgba(34,197,94,0.7), rgba(20,184,166,0))", opacity: 0.8 }} />
+
+                {/* Avatar + name */}
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+                  <div style={{ width: isSm ? 42 : 50, height: isSm ? 42 : 50, minWidth: isSm ? 42 : 50, borderRadius: "50%", padding: 2, background: "linear-gradient(135deg, rgba(34,197,94,0.55), rgba(20,184,166,0.35))" }}>
+                    <img src={item.image} alt={item.name} style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover", display: "block" }} />
                   </div>
-                  <p style={styles.role}>{item.role}</p>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "nowrap" }}>
+                      <p style={{ margin: 0, fontSize: isSm ? 12 : 14, fontWeight: 700, color: "#0f172a", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "110px" }}>{item.name}</p>
+                      <span style={{ flexShrink: 0, display: "inline-flex", alignItems: "center", padding: "2px 6px", borderRadius: 999, background: "rgba(15,23,42,0.05)", color: "#475569", fontSize: 10, fontWeight: 600 }}>Client</span>
+                    </div>
+                    <p style={{ margin: "3px 0 0", fontSize: isSm ? 10 : 11, color: "#64748b", lineHeight: 1.4, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.role}</p>
+                  </div>
+                </div>
+
+                {/* Stars */}
+                <div style={{ display: "flex", gap: 2, marginBottom: 10, color: "#16a34a", fontSize: isSm ? 11 : 13 }}>
+                  {[...Array(5)].map((_, i) => <span key={i}>★</span>)}
+                </div>
+
+                {/* Quote mark */}
+                <div style={{ fontSize: 34, lineHeight: 0.7, color: "rgba(34,197,94,0.18)", fontWeight: 800, marginBottom: 6 }}>"</div>
+
+                {/* Text — clamp side cards */}
+                <p style={{
+                  fontSize: isSm ? 11 : 13,
+                  lineHeight: 1.8,
+                  color: "#334155",
+                  margin: "0 0 16px",
+                  display: "-webkit-box",
+                  WebkitLineClamp: item.position === "center" ? 99 : 4,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                }}>
+                  {item.text}
+                </p>
+
+                {/* Divider + company */}
+                <div style={{ width: "100%", height: 1, background: "linear-gradient(90deg, #e2e8f0, #f8fafc)", marginBottom: 10 }} />
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <p style={{ margin: 0, fontSize: 9, color: "#64748b", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase" }}>{item.company}</p>
+                  <div style={{ width: 8, height: 8, borderRadius: "50%", background: "linear-gradient(135deg, #22c55e, #14b8a6)", boxShadow: "0 0 0 3px rgba(34,197,94,0.10)" }} />
                 </div>
               </div>
-
-              <div style={styles.starRow}>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-              </div>
-
-              <div style={styles.quoteMark}>“</div>
-              <p style={styles.text}>{item.text}</p>
-
-              <div style={styles.bottomLine} />
-
-              <div style={styles.companyRow}>
-                <p style={styles.companyText}>{item.company}</p>
-                <div style={styles.verifiedDot} />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        <div style={styles.controlsWrap}>
-          <button
-            type="button"
-            onClick={prevSlide}
-            style={styles.navBtn}
-            aria-label="Previous testimonial"
+        {/* Controls */}
+        <div style={{ marginTop: isSm ? 20 : 28, display: "flex", justifyContent: "center", alignItems: "center", gap: 16 }}>
+          <button type="button" onClick={prevSlide} aria-label="Previous"
+            style={{ width: isSm ? 42 : 48, height: isSm ? 42 : 48, borderRadius: "50%", border: "1px solid rgba(15,23,42,0.08)", background: "#ffffff", color: "#0f172a", cursor: "pointer", boxShadow: "0 8px 20px rgba(15,23,42,0.06)", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.25s ease" }}
           >
             <ArrowLeft />
           </button>
 
-          <div style={styles.dotsWrap}>
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                type="button"
-                onClick={() => setCurrent(index)}
-                style={{
-                  ...styles.dot,
-                  ...(current === index ? styles.activeDot : {}),
-                }}
-                aria-label={`Go to testimonial ${index + 1}`}
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            {testimonials.map((_, i) => (
+              <button key={i} type="button" onClick={() => setCurrent(i)} aria-label={`Testimonial ${i + 1}`}
+                style={{ width: current === i ? 28 : 8, height: 8, borderRadius: 999, border: "none", padding: 0, cursor: "pointer", background: current === i ? "linear-gradient(90deg, #22c55e, #14b8a6)" : "#cbd5e1", transition: "all 0.3s ease" }}
               />
             ))}
           </div>
 
-          <button
-            type="button"
-            onClick={nextSlide}
-            style={styles.navBtn}
-            aria-label="Next testimonial"
+          <button type="button" onClick={nextSlide} aria-label="Next"
+            style={{ width: isSm ? 42 : 48, height: isSm ? 42 : 48, borderRadius: "50%", border: "1px solid rgba(15,23,42,0.08)", background: "#ffffff", color: "#0f172a", cursor: "pointer", boxShadow: "0 8px 20px rgba(15,23,42,0.06)", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.25s ease" }}
           >
             <ArrowRight />
           </button>
         </div>
+
       </div>
     </section>
   );
