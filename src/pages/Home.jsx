@@ -1,5 +1,5 @@
 import Hero from "../components/Hero";
-import { OurClients } from "../components/Ourclients";
+// import { OurClients } from "../components/Ourclients";
 import TechnologyStrategySection from "../components/Technology";
 import OurCapabilitiesWhite from "../components/ourcapabilities";
 import FAQSection from "../components/FAQSection";
@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <OurClients/>
+      {/* <OurClients/> */}
       <TechnologyStrategySection />
       <OurCapabilitiesWhite />
       <PremiumTiltedTestimonials />
